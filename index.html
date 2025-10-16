@@ -7,7 +7,29 @@
 </head>
 <body>
     <h1>Hello if you see this, it works.</h1>
-    <p>this is gay</p>
-    hello
+
+    <!-- This is where the message will appear -->
+    <p id="message"></p>
+
+    <script>
+        // Use fetch to call the API
+        fetch('https://backend-f2nu.onrender.com/arthur')
+            .then(response => {
+                // Parse response as JSON
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(data => {
+                // Display the message in the paragraph
+                document.getElementById('message').textContent = data.message;
+            })
+            .catch(error => {
+                // Handle errors
+                console.error('Fetch error:', error);
+                document.getElementById('message').textContent = 'Failed to fetch message.';
+            });
+    </script>
 </body>
 </html>
